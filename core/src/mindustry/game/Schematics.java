@@ -631,17 +631,8 @@ public class Schematics implements Loadable{
 
         schem.tiles.each(req -> {
             req.config = BuildPlan.pointConfig(req.block, req.config, p -> {
-                int cx = p.x, cy = p.y;
-                int lx = cx;
-
-                if(direction >= 0){
-                    cx = -cy;
-                    cy = lx;
-                }else{
-                    cx = cy;
-                    cy = -lx;
-                }
-                p.set(cx, cy);
+                int step = direction >= 0 ? 3 : 1;
+                p.rotate(step);
             });
 
             //rotate actual request, centered on its multiblock position
